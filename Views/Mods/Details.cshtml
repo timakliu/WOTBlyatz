@@ -1,0 +1,27 @@
+﻿@{
+    var hasActiveSubscription = (bool)(ViewData["HasActiveSubscription"] ?? false);
+}
+
+<div class="container mt-4">
+    <h1>@Model.Name</h1>
+    <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid mb-4">
+    <p>@Model.Description</p>
+    <div class="mt-3">
+        <a href="/Mods" class="btn btn-secondary">Назад к списку</a>
+        @if (Model.IsSubscriptionRequired)
+        {
+            if (hasActiveSubscription)
+            {
+                <a href="/Mods/Download/@Model.Id" class="btn btn-primary">Скачать</a>
+            }
+            else
+            {
+                <span class="text-danger">Для скачивания требуется подписка</span>
+            }
+        }
+        else
+        {
+            <a href="/Mods/Download/@Model.Id" class="btn btn-primary">Скачать</a>
+        }
+    </div>
+</div>

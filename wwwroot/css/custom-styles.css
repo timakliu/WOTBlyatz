@@ -1,0 +1,108 @@
+/* Общий фон и текст сайта */
+body {
+    background-color: #28292d;
+    color: #ffffff;
+}
+
+/* Header (navbar) */
+.navbar {
+    background-color: #1f1f1f !important; /* Фон navbar */
+    /* border-bottom: 1px solid #333333; Граница (опционально) */
+}
+
+.navbar a {
+color: #ffffff !important; /* Белый текст ссылок */
+}
+
+.navbar a:hover {
+    color: #0d6efd !important; /* Цвет при наведении */
+}
+
+/* Убираем светлые бордеры и задаём тёмно-серый цвет */
+
+/* Header (navbar) */
+.navbar {
+    border-bottom: 1px solid #333333 !important; /* Тёмно-серый бордер */
+}
+
+/* Footer */
+footer.border-top {
+    background-color: #1f1f1f; /* Темный фон (опционально) */
+    text-align: center; /* Центрируем текст */
+    /* color: #b0b0b0; Серый текст (опционально) */
+    border-top: 1px solid #333333 !important; /* Тёмно-серый бордер */
+}
+
+
+
+
+a {
+    color: #bb86fc;
+}
+
+.navbar {
+    background-color: #1f1f1f;
+}
+
+.card {
+    background-color: #1f1f1f;
+    color: #ffffff;
+    border: 1px solid #333;
+}
+
+
+
+/* Контейнер изображения */
+    .image-container {
+    height: 100%; /* Задаем фиксированную высоту для всех изображений */
+    overflow: hidden; /* Убираем все, что выходит за границы */
+    border-top-left-radius: 10px; /* Радиусы карточки */
+    border-top-right-radius: 10px;
+}
+
+/* Само изображение */
+.card-img-top {
+    width: 100%; /* Изображение занимает весь контейнер */
+    height: 100%; /* Растягиваем изображение по высоте контейнера */
+    object-fit: cover; /* Сохраняем пропорции, обрезая лишнее */
+    object-position: center; /* Центрируем изображение */
+}
+
+/* Общие стили карточек */
+.card {
+    background-color: #1f1f1f;
+    color: #fff;
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.card-title {
+    text-align: center;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #b0b0b0;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+    .card-body .mt-auto {
+        margin-top: auto;
+    }
+
+h1 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 2rem;
+}

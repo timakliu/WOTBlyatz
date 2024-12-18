@@ -1,3 +1,6 @@
+#  service nginx reload
+
+
 # DeployAspNetCoreGuide
 
 клоним репу \
@@ -63,7 +66,7 @@ sudo systemctl start kestrel-deploy-guide.service \
 sudo systemctl status kestrel-deploy-guide.service \
 
 настройки nginx \
-sudo nano /etc/nginx/sites-available/excalib.ru \
+sudo nano /etc/nginx/sites-available/wotblyatz.com \
 
 конфиг нжинкса проверь порт приложения в демоне \
 

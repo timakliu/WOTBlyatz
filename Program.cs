@@ -31,19 +31,19 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
 
-// Настройка аутентификации
-//builder.Services.AddAuthentication(options =>
-//{
-//    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-//    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-//})
-//.AddCookie()
-//.AddGoogle(googleOptions =>
-//{
-//    googleOptions.ClientId = "817459924499-djegsgdigmcmn32ab11j4g2f19sedm74.apps.googleusercontent.com";
-//    googleOptions.ClientSecret = "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";
-//    googleOptions.CallbackPath = "/signin-google";
-//});
+//Настройка аутентификации
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+})
+.AddCookie()
+.AddGoogle(googleOptions =>
+{
+    googleOptions.ClientId = "817459924499-djegsgdigmcmn32ab11j4g2f19sedm74.apps.googleusercontent.com";
+    googleOptions.ClientSecret = "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";
+    googleOptions.CallbackPath = "/signin-google";
+});
 
 builder.Services.AddControllersWithViews();
 

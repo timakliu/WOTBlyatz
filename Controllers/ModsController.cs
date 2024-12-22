@@ -19,7 +19,7 @@ namespace WOTBlyatz.Controllers
                 Id = 1,
                 Name = "Мод 1",
                 Description = "Этот мод добавляет новые возможности и улучшения в игровой процесс, делая его более увлекательным и разнообразным.",
-                ImageUrl = "/images/mod1.jpg",
+                ImageUrl = "/Images/mod1.jpg",
                 DownloadUrl = "/downloads/mod1.zip",
                 IsSubscriptionRequired = false
 
@@ -28,7 +28,7 @@ namespace WOTBlyatz.Controllers
                 Id = 2,
                 Name = "Мод 2",
                 Description = "Уникальный мод, который предоставляет игрокам доступ к новым инструментам, персонажам и локациям.",
-                ImageUrl = "/images/mod2.jpg",
+                ImageUrl = "/Images/mod2.jpg",
                 DownloadUrl = "/downloads/mod1.zip",
                 IsSubscriptionRequired = true
             },
@@ -36,7 +36,7 @@ namespace WOTBlyatz.Controllers
                 Id = 3,
                 Name = "Мод 3",
                 Description = "Обновите свою игру с этим потрясающим модом, добавляющим реалистичные графические эффекты и новые звуковые элементы.",
-                ImageUrl = "/images/mod3.jpg",
+                ImageUrl = "/Images/mod3.jpg",
                 DownloadUrl = "/downloads/mod1.zip",
                 IsSubscriptionRequired = true
             },
@@ -44,7 +44,7 @@ namespace WOTBlyatz.Controllers
                 Id = 4,
                 Name = "Мод 4",
                 Description = "Мод, который меняет механику игры, добавляя дополнительные уровни сложности и уникальные испытания для игроков.",
-                ImageUrl = "/images/mod4.jpg",
+                ImageUrl = "/Images/mod4.jpg",
                 DownloadUrl = "/downloads/mod1.zip"
             }
         };

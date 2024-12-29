@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using WOTBlyatz.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.AspNetCore.Mvc.Formatters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,7 +45,6 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 //    googleOptions.CallbackPath = "/signin-google";
 //});
 
-
 builder.Services.AddAuthentication().AddGoogle(googleOptions =>
 {
     googleOptions.ClientId = "817459924499-djegsgdigmcmn32ab11j4g2f19sedm74.apps.googleusercontent.com";
@@ -71,6 +69,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.Use(async (context, next) =>
+{
+    context.Response.Headers["Content-Type"] = "text/html; charset=utf-8";
+    await next();
+});
 
 
 app.UseAuthentication(); // ВАЖНО: должно быть перед Authorization

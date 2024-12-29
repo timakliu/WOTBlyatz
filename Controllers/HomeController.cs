@@ -105,7 +105,7 @@ namespace WOTBlyatz.Controllers
                     !DateTime.TryParse(subscriptionEndDateClaim.Value, out var subscriptionEndDate) ||
                     subscriptionEndDate < DateTime.UtcNow)
                 {
-                    TempData["Error"] = "Для скачивания этого мода требуется активная подписка.";
+                    TempData["Error"] = "Для скачивания этого мода требуется активная подписка."; 
                     return RedirectToAction("Details", new { id });
                 }
             }

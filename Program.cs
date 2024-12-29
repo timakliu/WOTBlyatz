@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using WOTBlyatz.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +45,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 //    googleOptions.ClientSecret = "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";
 //    googleOptions.CallbackPath = "/signin-google";
 //});
+
 
 builder.Services.AddAuthentication().AddGoogle(googleOptions =>
 {

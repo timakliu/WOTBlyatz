@@ -1,18 +1,18 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Authorization;
+п»їusing Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using System.Security.Claims;
 using WOTBlyatz.Models;
 
 namespace WOTBlyatz.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController1 : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController1> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager)
+        public HomeController1(ILogger<HomeController1> logger, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _userManager = userManager;
@@ -22,7 +22,7 @@ namespace WOTBlyatz.Controllers
             new Mod {
                 Id = 1,
                 Name = "Mod 1",
-                Description = "Этот мод добавляет новые возможности и улучшения в игровой процесс, делая его более увлекательным и разнообразным.",
+                Description = "Р­С‚РѕС‚ РјРѕРґ РґРѕР±Р°РІР»СЏРµС‚ РЅРѕРІС‹Рµ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё Рё СѓР»СѓС‡С€РµРЅРёСЏ РІ РёРіСЂРѕРІРѕР№ РїСЂРѕС†РµСЃСЃ, РґРµР»Р°СЏ РµРіРѕ Р±РѕР»РµРµ СѓРІР»РµРєР°С‚РµР»СЊРЅС‹Рј Рё СЂР°Р·РЅРѕРѕР±СЂР°Р·РЅС‹Рј.",
                 ImageUrl = "/Images/mod1.jpg",
                 DownloadUrl = "/downloads/mod1.zip",
                 IsSubscriptionRequired = false
@@ -30,24 +30,24 @@ namespace WOTBlyatz.Controllers
             },
             new Mod {
                 Id = 2,
-                Name = "Мод 2",
-                Description = "Уникальный мод, который предоставляет игрокам доступ к новым инструментам, персонажам и локациям.",
+                Name = "РњРѕРґ 2",
+                Description = "РЈРЅРёРєР°Р»СЊРЅС‹Р№ РјРѕРґ, РєРѕС‚РѕСЂС‹Р№ РїСЂРµРґРѕСЃС‚Р°РІР»СЏРµС‚ РёРіСЂРѕРєР°Рј РґРѕСЃС‚СѓРї Рє РЅРѕРІС‹Рј РёРЅСЃС‚СЂСѓРјРµРЅС‚Р°Рј, РїРµСЂСЃРѕРЅР°Р¶Р°Рј Рё Р»РѕРєР°С†РёСЏРј.",
                 ImageUrl = "/Images/mod2.jpg",
                 DownloadUrl = "/downloads/mod1.zip",
                 IsSubscriptionRequired = true
             },
             new Mod {
                 Id = 3,
-                Name = "Мод 3",
-                Description = "Обновите свою игру с этим потрясающим модом, добавляющим реалистичные графические эффекты и новые звуковые элементы.",
+                Name = "РњРѕРґ 3",
+                Description = "РћР±РЅРѕРІРёС‚Рµ СЃРІРѕСЋ РёРіСЂСѓ СЃ СЌС‚РёРј РїРѕС‚СЂСЏСЃР°СЋС‰РёРј РјРѕРґРѕРј, РґРѕР±Р°РІР»СЏСЋС‰РёРј СЂРµР°Р»РёСЃС‚РёС‡РЅС‹Рµ РіСЂР°С„РёС‡РµСЃРєРёРµ СЌС„С„РµРєС‚С‹ Рё РЅРѕРІС‹Рµ Р·РІСѓРєРѕРІС‹Рµ СЌР»РµРјРµРЅС‚С‹.",
                 ImageUrl = "/Images/mod3.jpg",
                 DownloadUrl = "/downloads/mod1.zip",
                 IsSubscriptionRequired = true
             },
             new Mod {
                 Id = 4,
-                Name = "Мод 4",
-                Description = "Мод, который меняет механику игры, добавляя дополнительные уровни сложности и уникальные испытания для игроков.",
+                Name = "РњРѕРґ 4",
+                Description = "РњРѕРґ, РєРѕС‚РѕСЂС‹Р№ РјРµРЅСЏРµС‚ РјРµС…Р°РЅРёРєСѓ РёРіСЂС‹, РґРѕР±Р°РІР»СЏСЏ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ СѓСЂРѕРІРЅРё СЃР»РѕР¶РЅРѕСЃС‚Рё Рё СѓРЅРёРєР°Р»СЊРЅС‹Рµ РёСЃРїС‹С‚Р°РЅРёСЏ РґР»СЏ РёРіСЂРѕРєРѕРІ.",
                 ImageUrl = "/Images/mod4.jpg",
                 DownloadUrl = "/downloads/mod1.zip"
             }
@@ -64,10 +64,10 @@ namespace WOTBlyatz.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
 
-            // Проверяем, есть ли подписка
+            // РџСЂРѕРІРµСЂСЏРµРј, РµСЃС‚СЊ Р»Рё РїРѕРґРїРёСЃРєР°
             var hasActiveSubscription = user != null && user.DateOfSubscription > DateTime.UtcNow;
 
-            // Передаём данные через ViewData
+            // РџРµСЂРµРґР°С‘Рј РґР°РЅРЅС‹Рµ С‡РµСЂРµР· ViewData
             ViewData["HasActiveSubscription"] = hasActiveSubscription;
 
             return View(mod);
@@ -83,13 +83,13 @@ namespace WOTBlyatz.Controllers
             if (mod.IsSubscriptionRequired)
             {
 
-                // Получение информации о текущем пользователе из контекста
+                // РџРѕР»СѓС‡РµРЅРёРµ РёРЅС„РѕСЂРјР°С†РёРё Рѕ С‚РµРєСѓС‰РµРј РїРѕР»СЊР·РѕРІР°С‚РµР»Рµ РёР· РєРѕРЅС‚РµРєСЃС‚Р°
                 var subscriptionEndDateClaim = User.FindFirst("DateOfSubscription");
                 if (subscriptionEndDateClaim == null ||
                     !DateTime.TryParse(subscriptionEndDateClaim.Value, out var subscriptionEndDate) ||
                     subscriptionEndDate < DateTime.UtcNow)
                 {
-                    TempData["Error"] = "Для скачивания этого мода требуется активная подписка.";
+                    TempData["Error"] = "Р”Р»СЏ СЃРєР°С‡РёРІР°РЅРёСЏ СЌС‚РѕРіРѕ РјРѕРґР° С‚СЂРµР±СѓРµС‚СЃСЏ Р°РєС‚РёРІРЅР°СЏ РїРѕРґРїРёСЃРєР°.";
                     return RedirectToAction("Details", new { id });
                 }
             }
@@ -97,7 +97,7 @@ namespace WOTBlyatz.Controllers
             return File(mod.DownloadUrl, "application/octet-stream", $"{mod.Name}.zip");
         }
 
-    
+
 
         public IActionResult Privacy()
         {
@@ -110,5 +110,4 @@ namespace WOTBlyatz.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
-
 }

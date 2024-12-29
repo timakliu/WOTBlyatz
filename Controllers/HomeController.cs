@@ -7,12 +7,12 @@ using WOTBlyatz.Models;
 
 namespace WOTBlyatz.Controllers
 {
-    public class HomeController1 : Controller
+    public class HomeController : Controller
     {
-        private readonly ILogger<HomeController1> _logger;
+        private readonly ILogger<HomeController> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController1(ILogger<HomeController1> logger, UserManager<ApplicationUser> userManager)
+        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _userManager = userManager;

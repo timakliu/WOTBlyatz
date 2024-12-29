@@ -82,15 +82,6 @@ namespace WOTBlyatz.Controllers
 
             if (mod.IsSubscriptionRequired)
             {
-                //var user = HttpContext.User; // Текущий пользователь
-                //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Получаем ID пользователя
-                //var appUser = _userManager.Users.FirstOrDefault(u => u.Id == userId);
-
-                //if (appUser == null || appUser.DateOfSubscription < DateTime.UtcNow)
-                //{
-                //    TempData["Error"] = "Для скачивания этого мода требуется активная подписка.";
-                //    return RedirectToAction("Details", new { id });
-                //}
 
                 // Получение информации о текущем пользователе из контекста
                 var subscriptionEndDateClaim = User.FindFirst("DateOfSubscription");

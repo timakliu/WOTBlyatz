@@ -69,6 +69,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("Content-Type", "text/html; charset=utf-8");
+    await next.Invoke();
+});
 
 app.UseAuthentication(); // ВАЖНО: должно быть перед Authorization
 app.UseAuthorization();

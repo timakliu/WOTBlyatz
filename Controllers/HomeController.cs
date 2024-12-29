@@ -19,43 +19,43 @@ namespace WOTBlyatz.Controllers
         }
 
         private readonly List<Mod> mods = new()
-    {
-        new Mod
         {
-            Id = 1,
-            Name = "Мод 1",
-            Description = "Этот мод добавляет новые возможности и улучшения в игровой процесс, делая его более увлекательным и разнообразным.",
-            ImageUrl = "/Images/mod1.jpg",
-            DownloadUrl = "/downloads/mod1.zip",
-            IsSubscriptionRequired = false
-        },
-        new Mod
-        {
-            Id = 2,
-            Name = "Мод 2",
-            Description = "Уникальный мод, который предоставляет игрокам доступ к новым инструментам, персонажам и локациям.",
-            ImageUrl = "/Images/mod2.jpg",
-            DownloadUrl = "/downloads/mod1.zip",
-            IsSubscriptionRequired = true
-        },
-        new Mod
-        {
-            Id = 3,
-            Name = "Мод 3",
-            Description = "Обновите свою игру с этим потрясающим модом, добавляющим реалистичные графические эффекты и новые звуковые элементы.",
-            ImageUrl = "/Images/mod3.jpg",
-            DownloadUrl = "/downloads/mod1.zip",
-            IsSubscriptionRequired = true
-        },
-        new Mod
-        {
-            Id = 4,
-            Name = "Мод 4",
-            Description = "Мод, который меняет механику игры, добавляя дополнительные уровни сложности и уникальные испытания для игроков.",
-            ImageUrl = "/Images/mod4.jpg",
-            DownloadUrl = "/downloads/mod1.zip"
-        }
-    };
+            new Mod
+            {
+                Id = 1,
+                Name = "Мод 1",
+                Description = "Этот мод добавляет новые возможности и улучшения в игровой процесс, делая его более увлекательным и разнообразным.",
+                ImageUrl = "/Images/mod1.jpg",
+                DownloadUrl = "/downloads/mod1.zip",
+                IsSubscriptionRequired = false
+            },
+            new Mod
+            {
+                Id = 2,
+                Name = "Мод 2",
+                Description = "Уникальный мод, который предоставляет игрокам доступ к новым инструментам, персонажам и локациям.",
+                ImageUrl = "/Images/mod2.jpg",
+                DownloadUrl = "/downloads/mod1.zip",
+                IsSubscriptionRequired = true
+            },
+            new Mod
+            {
+                Id = 3,
+                Name = "Мод 3",
+                Description = "Обновите свою игру с этим потрясающим модом, добавляющим реалистичные графические эффекты и новые звуковые элементы.",
+                ImageUrl = "/Images/mod3.jpg",
+                DownloadUrl = "/downloads/mod1.zip",
+                IsSubscriptionRequired = true
+            },
+            new Mod
+            {
+                Id = 4,
+                Name = "Мод 4",
+                Description = "Мод, который меняет механику игры, добавляя дополнительные уровни сложности и уникальные испытания для игроков.",
+                ImageUrl = "/Images/mod4.jpg",
+                DownloadUrl = "/downloads/mod1.zip"
+            }
+        };
 
         public IActionResult Index()
         {
@@ -82,13 +82,16 @@ namespace WOTBlyatz.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
 
+            // Проверяем, есть ли подписка
             var hasActiveSubscription = user != null && user.DateOfSubscription > DateTime.UtcNow;
+
+            // Передаём данные через ViewData
             ViewData["HasActiveSubscription"] = hasActiveSubscription;
 
             return View(mod);
         }
 
-       
+
         public IActionResult Download(int id)
         {
             var mod = mods.FirstOrDefault(m => m.Id == id);

@@ -18,84 +18,97 @@ namespace WOTBlyatz.Controllers
             _userManager = userManager;
         }
 
-        private readonly List<Mod> mods = new() {
-            new Mod {
-                Id = 1,
-                Name = "Mod 1",
-                Description = "Этот мод добавляет новые возможности и улучшения в игровой процесс, делая его более увлекательным и разнообразным.",
-                ImageUrl = "/Images/mod1.jpg",
-                DownloadUrl = "/downloads/mod1.zip",
-                IsSubscriptionRequired = false
-
-            },
-            new Mod {
-                Id = 2,
-                Name = "Мод 2",
-                Description = "Уникальный мод, который предоставляет игрокам доступ к новым инструментам, персонажам и локациям.",
-                ImageUrl = "/Images/mod2.jpg",
-                DownloadUrl = "/downloads/mod1.zip",
-                IsSubscriptionRequired = true
-            },
-            new Mod {
-                Id = 3,
-                Name = "Мод 3",
-                Description = "Обновите свою игру с этим потрясающим модом, добавляющим реалистичные графические эффекты и новые звуковые элементы.",
-                ImageUrl = "/Images/mod3.jpg",
-                DownloadUrl = "/downloads/mod1.zip",
-                IsSubscriptionRequired = true
-            },
-            new Mod {
-                Id = 4,
-                Name = "Мод 4",
-                Description = "Мод, который меняет механику игры, добавляя дополнительные уровни сложности и уникальные испытания для игроков.",
-                ImageUrl = "/Images/mod4.jpg",
-                DownloadUrl = "/downloads/mod1.zip"
-            }
-        };
-
-        public IActionResult Index() => View(mods);
-
-        public IActionResult Details(int id)
+        private readonly List<Mod> mods = new()
+    {
+        new Mod
         {
-            var mod = mods.FirstOrDefault(m => m.Id == id);
-            if (mod == null)
-                return NotFound();
-
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
-
-            // Проверяем, есть ли подписка
-            var hasActiveSubscription = user != null && user.DateOfSubscription > DateTime.UtcNow;
-
-            // Передаём данные через ViewData
-            ViewData["HasActiveSubscription"] = hasActiveSubscription;
-
-            return View(mod);
+            Id = 1,
+            Name = "Mod 1",
+            Description = "Этот мод добавляет новые возможности и улучшения в игровой процесс.",
+            ImageUrl = "/Images/mod1.jpg",
+            DownloadUrl = "/downloads/mod1.zip",
+            IsSubscriptionRequired = false,
+            DateAdded = DateTime.Now.AddDays(-10),
+            Rating = 4.5,
+            Categories = new List<ModCategory> { ModCategory.Textures, ModCategory.Models }
+        },
+        new Mod
+        {
+            Id = 2,
+            Name = "Мод 2",
+            Description = "Уникальный мод, который предоставляет доступ к новым инструментам.",
+            ImageUrl = "/Images/mod2.jpg",
+            DownloadUrl = "/downloads/mod2.zip",
+            IsSubscriptionRequired = true,
+            DateAdded = DateTime.Now.AddDays(-5),
+            Rating = 4.8,
+            Categories = new List<ModCategory> { ModCategory.Models }
+        },
+        new Mod
+        {
+            Id = 3,
+            Name = "Мод 3",
+            Description = "Добавляет графические эффекты и новые звуковые элементы.",
+            ImageUrl = "/Images/mod3.jpg",
+            DownloadUrl = "/downloads/mod3.zip",
+            IsSubscriptionRequired = true,
+            DateAdded = DateTime.Now.AddDays(-1),
+            Rating = 4.2,
+            Categories = new List<ModCategory> { ModCategory.Textures }
+        },
+         new Mod
+        {
+            Id = 3,
+            Name = "aaa 2",
+            Description = "Добавляет графические эффекты и новые звуковые элементы.",
+            ImageUrl = "/Images/mod4.jpg",
+            DownloadUrl = "/downloads/mod4.zip",
+            IsSubscriptionRequired = true,
+            DateAdded = DateTime.Now.AddDays(-51),
+            Rating = 4.4,
+            Categories = new List<ModCategory> { ModCategory.Textures, ModCategory.Banned, ModCategory.Models}
         }
+    };
 
-        [Authorize]
-        public IActionResult Download(int id)
+        public IActionResult Index(string categoryFilter = "All", string sortBy = "name")
         {
-            var mod = mods.FirstOrDefault(m => m.Id == id);
-            if (mod == null)
-                return NotFound();
+            var filteredMods = mods;
 
-            if (mod.IsSubscriptionRequired)
+            // Фильтрация по категории
+            if (categoryFilter != "All")
             {
-
-                // Получение информации о текущем пользователе из контекста
-                var subscriptionEndDateClaim = User.FindFirst("DateOfSubscription");
-                if (subscriptionEndDateClaim == null ||
-                    !DateTime.TryParse(subscriptionEndDateClaim.Value, out var subscriptionEndDate) ||
-                    subscriptionEndDate < DateTime.UtcNow)
+                var category = Enum.TryParse(categoryFilter, out ModCategory parsedCategory) ? parsedCategory : (ModCategory?)null;
+                if (category.HasValue)
                 {
-                    TempData["Error"] = "Для скачивания этого мода требуется активная подписка.";
-                    return RedirectToAction("Details", new { id });
+                    filteredMods = filteredMods.Where(m => m.Categories.Contains(category.Value)).ToList();
                 }
             }
 
-            return File(mod.DownloadUrl, "application/octet-stream", $"{mod.Name}.zip");
+            // Сортировка
+            switch (sortBy)
+            {
+                case "name":
+                    filteredMods = filteredMods.OrderBy(m => m.Name).ToList();
+                    break;
+                case "date":
+                    filteredMods = filteredMods.OrderByDescending(m => m.DateAdded).ToList();
+                    break;
+                case "rating":
+                    filteredMods = filteredMods.OrderByDescending(m => m.Rating).ToList();
+                    break;
+                default:
+                    filteredMods = filteredMods.OrderBy(m => m.Name).ToList();
+                    break;
+            }
+
+            // Сохраняем параметры сортировки и категории в ViewData
+            ViewData["Category"] = categoryFilter;
+            ViewData["SortBy"] = sortBy;
+
+            return View(filteredMods);
         }
+
+
 
 
 

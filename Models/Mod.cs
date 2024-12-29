@@ -2,14 +2,23 @@
 {
     public class Mod
     {
-        public int Id { get; set; }            // Уникальный идентификатор мода
-        public string Name { get; set; }       // Название мода
-        public string Description { get; set; } // Краткое описание
-        public string ImageUrl { get; set; }   // Путь к изображению мода
-        public string DownloadUrl { get; set; } // Ссылка на скачивание архива
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string ImageUrl { get; set; }
+        public string DownloadUrl { get; set; }
+        public bool IsSubscriptionRequired { get; set; }
+        public DateTime DateAdded { get; set; } // Дата добавления
+        public double Rating { get; set; } // Рейтинг
+        public List<ModCategory> Categories { get; set; } // Категории мода
+    }
 
-
-        public bool IsSubscriptionRequired { get; set; } // Требуется ли подписка
+    // Перечисление категорий
+    public enum ModCategory
+    {
+        Textures,
+        Models,
+        Banned
     }
 
 }

@@ -106,3 +106,56 @@ h1 {
     text-align: center;
     margin-bottom: 2rem;
 }
+
+/* Простое меню категорий */
+.category-menu {
+    margin-bottom: 20px;
+}
+
+    .category-menu .nav-pills .nav-link {
+        background-color: #28292d; /* Темный фон */
+        color: #ffffff; /* Белый текст */
+        border: 1px solid transparent; /* Убираем стандартные бордеры */
+        margin: 0 5px; /* Небольшой отступ между пунктами */
+        transition: background-color 0.2s ease, color 0.2s ease; /* Плавная анимация */
+    }
+
+        /* Активная категория */
+        .category-menu .nav-pills .nav-link.active {
+            background-color: #bb86fc; /* Акцентный цвет */
+            color: #000; /* Тёмный текст для контраста */
+        }
+
+        /* Наведение */
+        .category-menu .nav-pills .nav-link:hover {
+            background-color: #444; /* Светлее при наведении */
+            color: #ffffff; /* Белый текст */
+        }
+
+
+
+.sort-by {
+    display: flex;
+    align-items: center;
+}
+
+
+.custom-select {
+    background-color: #1f1f1f; /* Темный фон */
+    color: #ffffff; /* Белый текст */
+    border: 1px solid #333333; /* Тёмно-серый бордер */
+    border-radius: 5px; /* Мягкие углы */
+    padding: 0.5rem 1rem; /* Удобное расстояние */
+    transition: all 0.3s ease; /* Анимация */
+}
+
+    .custom-select:focus {
+        outline: none; /* Убираем стандартный контур */
+        border-color: #0d6efd; /* Голубой бордер при фокусе */
+        box-shadow: 0 0 5px #0d6efd; /* Подсветка */
+    }
+
+    .custom-select:hover {
+        border-color: #bb86fc; /* Фиолетовый бордер при наведении */
+    }
+

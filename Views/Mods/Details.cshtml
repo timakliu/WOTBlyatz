@@ -1,4 +1,5 @@
 ﻿@{
+
     var hasActiveSubscription = (bool)(ViewData["HasActiveSubscription"] ?? false);
 }
 
@@ -6,22 +7,57 @@
     <h1>@Model.Name</h1>
     <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid mb-4">
     <p>@Model.Description</p>
-    <div class="mt-3">
-        <a href="/Mods" class="btn btn-secondary">Назад к списку</a>
-        @if (Model.IsSubscriptionRequired)
-        {
-            if (hasActiveSubscription)
-            {
-                <a href="/Mods/Download/@Model.Id" class="btn btn-primary">Скачать</a>
-            }
-            else
-            {
-                <span class="text-danger">Для скачивания требуется подписка</span>
-            }
-        }
-        else
-        {
-            <a href="/Mods/Download/@Model.Id" class="btn btn-primary">Скачать</a>
-        }
+
+    <div class="mt-4">
+        <h3>Вопросы и ответы</h3>
+        <div class="qa-item">
+            <button class="question-btn" onclick="toggleAnswer(1)">1. Как установить моды?</button>
+            <div id="answer-1" class="answer" style="display:none;">
+                Ответ: Чтобы установить моды, скачайте файл и следуйте инструкциям на экране.
+            </div>
+        </div>
+
+        <div class="qa-item">
+            <button class="question-btn" onclick="toggleAnswer(2)">2. Мод не работает, что делать?</button>
+            <div id="answer-2" class="answer" style="display:none;">
+                Ответ: Попробуйте переустановить мод или убедитесь, что ваша версия игры актуальна.
+            </div>
+        </div>
+
+        <div class="qa-item">
+            <button class="question-btn" onclick="toggleAnswer(3)">3. Что делать, если мод не скачивается?</button>
+            <div id="answer-3" class="answer" style="display:none;">
+                Ответ: Убедитесь, что ваше интернет-соединение стабильно и попробуйте еще раз.
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h3>Другие моды</h3>
+        <div class="row">
+           
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h3>Комментарии</h3>
+        <div class="comment">
+            <p><strong>Иван:</strong> Отличный мод! Работает идеально.</p>
+        </div>
+        <div class="comment">
+            <p><strong>Елена:</strong> У меня возникли проблемы с установкой, но автор помог решить!</p>
+        </div>
     </div>
 </div>
+
+<script>
+    function toggleAnswer(id) {
+        const answerElement = document.getElementById("answer-" + id);
+        // Переключаем видимость ответа
+        if (answerElement.style.display === "none") {
+            answerElement.style.display = "block";
+        } else {
+            answerElement.style.display = "none";
+        }
+    }
+</script>

@@ -35,8 +35,6 @@
             </ul>
         </div>
 
-
-
         <!-- Сортировка -->
         <div class="sort-by">
             <label for="sortBy" class="form-label me-2">Сортировать по:</label>
@@ -56,11 +54,37 @@
                 <div class="card h-100 shadow-lg">
                     <div class="image-container position-relative">
                         <img class="card-img-top" src="@mod.ImageUrl" alt="@mod.Name">
+                        
+                        <!-- Подписка поверх изображения (маленький ярлык) -->
+                        @if (mod.IsSubscriptionRequired)
+                        {
+                            <div class="subscription-overlay position-absolute top-0 start-0 bg-warning text-dark p-1 fs-6">
+                                <i class="fas fa-crown fs-7"></i> Требуется подписка
+                            </div>
+                        }
                     </div>
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">@mod.Name</h5>
                         <p class="card-text">@mod.Description</p>
-                        <p>Рейтинг: @mod.Rating</p>
+                        <p>Рейтинг: 
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                if (mod.Rating >= i)
+                                {
+                                    <i class="fas fa-star text-warning" style="font-size: 1rem;"></i>
+                                }
+                                else if (mod.Rating >= i - 0.5)
+                                {
+                                    <i class="fas fa-star-half-alt text-warning" style="font-size: 1rem;"></i>
+                                }
+                                else
+                                {
+                                    <i class="far fa-star text-warning" style="font-size: 1rem;"></i>
+                                }
+                            }
+                            <span class="ms-2">@mod.Rating</span> <!-- Число рейтинга -->
+                        </p>
+
                         <div class="mt-auto text-center">
                             <a href="/Mods/Details/@mod.Id" class="btn btn-outline-primary btn-sm">Подробнее</a>
                         </div>

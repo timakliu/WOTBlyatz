@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="~/css/custom-styles.css" asp-append-version="true">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.13/jquery.validate.unobtrusive.min.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8154119994575860"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8154119994575860" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 
 </head>
 <body>
@@ -64,16 +65,71 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3 main-block">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-light py-4" style="background-color: #1f1f1f;">
         <div class="container">
-            &copy; 2024 - WOTBlyatz - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row">
+                <!-- Блок "О нас" -->
+                <div class="col-md-6 mb-3 text-start">
+                    <h5 >О нас</h5>
+                    <p>
+                        WOTBlyatz — ваш источник качественных авторских модификаций для Android и ПК.
+                        Здесь собраны модпаки, зоны пробития, скины, прицелы, ангары, звуки экипажа, эффекты, HD-модели, ремоделирования и многое другое.
+                        Мы стремимся сделать все моды доступными в одном месте.
+                    </p>
+                </div>
+
+                <!-- Блок "Социальные сети" -->
+                <div class="col-md-3 mb-3 text-start">
+                    <h5 >Мы в социальных сетях</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="@("https://www.youtube.com/@WotBlyatz1337")" class="text-light text-decoration-none d-flex align-items-center" target="_blank">
+                                <i class="fab fa-youtube me-2"></i> YouTube
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://t.me/WotBlyatz" class="text-light text-decoration-none d-flex align-items-center" target="_blank">
+                                <i class="fab fa-telegram me-2"></i> Telegram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@("https://www.tiktok.com/@wot_blyatz")" class="text-light text-decoration-none d-flex align-items-center" target="_blank">
+                                <i class="fab fa-tiktok me-2"></i> TikTok
+                            </a>
+                        </li>
+                        @* <li>
+                            <a href="https://discord.com" class="text-light text-decoration-none d-flex align-items-center" target="_blank">
+                                <i class="fab fa-discord me-2"></i> Discord
+                            </a>
+                        </li *@
+                    </ul>
+                </div>
+
+                <!-- Блок "Контакты" -->
+                <div class="col-md-3 mb-3 text-start">
+                    <h5>Контакты</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="mailto:contact@wotblyatz.com" class="text-light text-decoration-none d-flex align-items-center">
+                                <i class="fab fa-google me-2"></i> wotblyatz@gmail.com
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <p class="mb-0 copy-text">&copy; 2025 - WOTBlyatz</p>
+            </div>
         </div>
     </footer>
+
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

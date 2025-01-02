@@ -231,3 +231,30 @@ footer .copy-text {
         border-color: #b0b0b0;
         background-color: #bb86fc;
     }
+
+
+
+/* Прячем меню на мобильных устройствах */
+#menu-items {
+    display: none;
+}
+
+    /* Отображаем меню при активном состоянии */
+    #menu-items.show {
+        display: block;
+    }
+
+/* На больших экранах меню всегда видно */
+@media (min-width: 992px) {
+    #menu-items {
+        display: flex !important;
+    }
+
+    #menu-toggle {
+        display: none;
+    }
+}
+
+.btn-secondary-menu{
+    margin-top: 34px;
+}

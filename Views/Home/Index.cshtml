@@ -9,25 +9,25 @@
         <div class="category-menu mb-4 text-center">
             <ul class="nav nav-pills justify-content-center">
                 <li class="nav-item">
-                    <a class="nav-link @(ViewData["Category"] == "All" ? "active" : "")"
+                    <a class="nav-link @(ViewData["Category"]?.ToString() == "All" || ViewData["Category"] == null ? "active-menu-item" : "")"
                        href="@Url.Action("Index", new { categoryFilter = "All", sortBy = ViewData["SortBy"] })">
                         Все моды
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @(ViewData["Category"] == "Textures" ? "active" : "")"
+                    <a class="nav-link @(ViewData["Category"]?.ToString() == "Textures" ? "active-menu-item" : "")"
                        href="@Url.Action("Index", new { categoryFilter = "Textures", sortBy = ViewData["SortBy"] })">
                         Текстуры
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @(ViewData["Category"] == "Models" ? "active" : "")"
+                    <a class="nav-link @(ViewData["Category"]?.ToString() == "Models" ? "active-menu-item" : "")"
                        href="@Url.Action("Index", new { categoryFilter = "Models", sortBy = ViewData["SortBy"] })">
                         Модели
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @(ViewData["Category"] == "Banned" ? "active" : "")"
+                    <a class="nav-link @(ViewData["Category"]?.ToString() == "Banned" ? "active-menu-item" : "")"
                        href="@Url.Action("Index", new { categoryFilter = "Banned", sortBy = ViewData["SortBy"] })">
                         Запрещенные
                     </a>

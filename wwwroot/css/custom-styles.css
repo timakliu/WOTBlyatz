@@ -213,3 +213,21 @@ footer .copy-text {
 .subscription-overlay{
     font-size:12px!important;
 }
+
+
+.active-menu-item {
+    border-bottom: 2px solid #bb86fc !important; /* Фиолетовый цвет линии */
+    padding-bottom: 2px; /* Отступ между текстом и линией */
+}
+
+.btn-outline-primary {
+    color: #bb86fc;
+    border-color: #bb86fc;
+}
+
+    .btn-outline-primary:hover, .btn-outline-primary:focus {
+        color: #fff; /* Цвет при наведении или фокусе */
+
+        border-color: #b0b0b0;
+        background-color: #bb86fc;
+    }

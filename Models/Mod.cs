@@ -10,15 +10,14 @@
         public bool IsSubscriptionRequired { get; set; }
         public DateTime DateAdded { get; set; } // Дата добавления
         public double Rating { get; set; } // Рейтинг
+        public int DownloadCount { get; set; } // Количество скачиваний
         public List<ModCategory> Categories { get; set; } // Категории мода
     }
 
-    // Перечисление категорий
     public enum ModCategory
     {
         Textures,
         Models,
         Banned
     }
-
 }

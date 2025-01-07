@@ -1,51 +1,120 @@
 ﻿@{
 
     var hasActiveSubscription = (bool)(ViewData["HasActiveSubscription"] ?? false);
+    var comments = (List<Comment>)ViewData["Comments"];
 }
 
 <div class="container mt-4">
     <h1>@Model.Name</h1>
-    <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid mb-4">
+    <div class="d-flex justify-content-center align-items-center mb-3">
+        <div class="text-center mx-3">
+            <i class="fas fa-star text-warning"></i>
+            <span>@Model.Rating.ToString("0.0")</span>
+        </div>
+        <div class="text-center mx-3">
+            <i class="fas fa-download text-info"></i>
+            <span>@Model.DownloadCount</span>
+        </div>
+        <div class="text-center mx-3">
+            <i class="fas fa-calendar-alt text-primary"></i>
+            <span>@Model.DateAdded.ToString("dd.MM.yyyy")</span>
+        </div>
+    </div>
+    <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid mod-detail-image mb-4">
+
     <p>@Model.Description</p>
 
+
     <div class="mt-4">
-        <h3>Вопросы и ответы</h3>
-        <div class="qa-item">
-            <button class="question-btn" onclick="toggleAnswer(1)">1. Как установить моды?</button>
-            <div id="answer-1" class="answer" style="display:none;">
-                Ответ: Чтобы установить моды, скачайте файл и следуйте инструкциям на экране.
+        <h3>FAQ</h3>
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        Как устанавливать моды?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Чтобы установить моды, скачайте файл и следуйте инструкциям на экране.
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="qa-item">
-            <button class="question-btn" onclick="toggleAnswer(2)">2. Мод не работает, что делать?</button>
-            <div id="answer-2" class="answer" style="display:none;">
-                Ответ: Попробуйте переустановить мод или убедитесь, что ваша версия игры актуальна.
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Мод не работает, что делать?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Попробуйте переустановить мод или убедитесь, что ваша версия игры актуальна.
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="qa-item">
-            <button class="question-btn" onclick="toggleAnswer(3)">3. Что делать, если мод не скачивается?</button>
-            <div id="answer-3" class="answer" style="display:none;">
-                Ответ: Убедитесь, что ваше интернет-соединение стабильно и попробуйте еще раз.
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Что делать, если мод не скачивается?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Убедитесь, что ваше интернет-соединение стабильно и попробуйте еще раз.
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
 
     <div class="mt-4">
         <h3>Другие моды</h3>
         <div class="row">
-           
+            @foreach (var otherMod in (List<WOTBlyatz.Models.Mod>)ViewData["OtherMods"])
+            {
+                <div class="col-md-3 mb-4">
+                    <a href="@Url.Action("Details", "Mods", new { id = otherMod.Id })" class="mod-card">
+                        <div class="mod-card position-relative">
+                            <img src="@otherMod.ImageUrl" class="mod-image w-100" alt="@otherMod.Name">
+                            <div class="mod-title position-absolute bottom-0 start-0 w-100 text-center">
+                                <span>@otherMod.Name</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
         </div>
     </div>
 
+
+
     <div class="mt-4">
-        <h3>Комментарии</h3>
-        <div class="comment">
-            <p><strong>Иван:</strong> Отличный мод! Работает идеально.</p>
-        </div>
-        <div class="comment">
-            <p><strong>Елена:</strong> У меня возникли проблемы с установкой, но автор помог решить!</p>
+        <h3>Комментарии (@comments.Count)</h3>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <form asp-action="AddComment" method="post">
+                <input type="hidden" name="modId" value="@Model.Id" />
+                <textarea name="text" class="form-control mb-2" placeholder="Оставьте комментарий..." required></textarea>
+                <button type="submit" class="btn btn-primary">Отправить</button>
+            </form>
+        }
+        else
+        {
+            <p class="text-warning">Комментарии могут оставлять только авторизованные пользователи.</p>
+        }
+
+        <div class="comments mt-3">
+            @foreach (var comment in (List<Comment>)ViewData["Comments"])
+            {
+                <div class="comment p-3 mb-3 rounded text-light">
+                    <strong>@comment.UserName</strong> <span class="text-muted">@comment.Date.ToString("dd.MM.yyyy HH:mm")</span>
+                    <p>@comment.Text</p>
+                </div>
+            }
         </div>
     </div>
 </div>

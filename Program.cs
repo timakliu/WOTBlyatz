@@ -19,6 +19,7 @@ builder.Services.AddLogging(configure =>
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     // Настройки безопасности
@@ -69,11 +70,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.Use(async (context, next) =>
-{
-    context.Response.Headers["Content-Type"] = "text/html; charset=utf-8";
-    await next();
-});
+//app.Use(async (context, next) =>
+//{
+//    context.Response.Headers["Content-Type"] = "text/html; charset=utf-8";
+//    await next();
+//});
 
 
 app.UseAuthentication(); // ВАЖНО: должно быть перед Authorization

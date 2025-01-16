@@ -16,7 +16,7 @@ namespace YWOTBlyatz.Data
         {
         }
 
-
+        public DbSet<Mod> Mods { get; set; }
     }
 
 }

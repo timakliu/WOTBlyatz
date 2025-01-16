@@ -3,68 +3,24 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WOTBlyatz.Models;
+using YWOTBlyatz.Data;
 
 namespace WOTBlyatz.Controllers
 {
     public class ModsController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        public ModsController(UserManager<ApplicationUser> userManager)
+
+        private readonly ApplicationDbContext _context;
+
+        private readonly List<Mod> mods;
+        public ModsController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
+            _context = context;
+            mods = _context.Mods.ToList();
         }
 
-        private readonly List<Mod> mods = new()
-    {
-        new Mod
-        {
-            Id = 1,
-            Name = "Mod 1",
-            Description = "Этот мод добавляет новые возможности и улучшения в игровой процесс.",
-            ImageUrl = "/Images/mod1.jpg",
-            DownloadUrl = "/downloads/mod1.zip",
-            IsSubscriptionRequired = false,
-            DateAdded = DateTime.Now.AddDays(-10),
-            Rating = 4.5,
-            Categories = new List<ModCategory> { ModCategory.Textures, ModCategory.Models }
-        },
-        new Mod
-        {
-            Id = 2,
-            Name = "Мод 2",
-            Description = "Уникальный мод, который предоставляет доступ к новым инструментам.",
-            ImageUrl = "/Images/mod2.jpg",
-            DownloadUrl = "/downloads/mod2.zip",
-            IsSubscriptionRequired = true,
-            DateAdded = DateTime.Now.AddDays(-5),
-            Rating = 4.8,
-            Categories = new List<ModCategory> { ModCategory.Models }
-        },
-        new Mod
-        {
-            Id = 3,
-            Name = "Мод 3",
-            Description = "Добавляет графические эффекты и новые звуковые элементы.",
-            ImageUrl = "/Images/mod3.jpg",
-            DownloadUrl = "/downloads/mod3.zip",
-            IsSubscriptionRequired = true,
-            DateAdded = DateTime.Now.AddDays(-1),
-            Rating = 4.2,
-            Categories = new List<ModCategory> { ModCategory.Textures }
-        },
-         new Mod
-        {
-            Id = 3,
-            Name = "aaa 2",
-            Description = "Добавляет графические эффекты и новые звуковые элементы.",
-            ImageUrl = "/Images/mod4.jpg",
-            DownloadUrl = "/downloads/mod4.zip",
-            IsSubscriptionRequired = true,
-            DateAdded = DateTime.Now.AddDays(-51),
-            Rating = 4.4,
-            Categories = new List<ModCategory> { ModCategory.Textures, ModCategory.Banned, ModCategory.Models}
-        }
-    };
 
         private static readonly List<Comment> comments = new()
 {

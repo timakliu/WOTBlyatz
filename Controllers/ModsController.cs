@@ -122,7 +122,7 @@ namespace WOTBlyatz.Controllers
         public IActionResult Index() => View(mods);
 
 
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Details(int id)
         {
             var mod = mods.FirstOrDefault(m => m.Id == id);

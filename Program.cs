@@ -8,6 +8,36 @@ using Microsoft.AspNetCore.Authentication.Google;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+static async Task InitializeRoles(IServiceProvider serviceProvider)
+{
+    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    string[] roleNames = { "Admin", "User" }; // Список ролей
+    foreach (var roleName in roleNames)
+    {
+        if (!await roleManager.RoleExistsAsync(roleName))
+        {
+            await roleManager.CreateAsync(new IdentityRole(roleName));
+        }
+    }
+}
+static async Task AssignAdminRole(IServiceProvider serviceProvider)
+{
+    var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+    // Найти пользователя
+    var user = await userManager.FindByEmailAsync("Admin1@gmail.com");
+    if (user != null)
+    {
+        // Проверить и назначить роль
+        if (!await userManager.IsInRoleAsync(user, "Admin"))
+        {
+            await userManager.AddToRoleAsync(user, "Admin");
+        }
+    }
+}
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddLogging(configure =>
@@ -18,6 +48,8 @@ builder.Services.AddLogging(configure =>
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
 
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -77,11 +109,25 @@ app.UseRouting();
 //});
 
 
+
+
 app.UseAuthentication(); // ВАЖНО: должно быть перед Authorization
 app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "adminMods",
+    pattern: "admin/mods/{action=Index}/{id?}",
+    defaults: new { controller = "AdminMods" });
+
+
+
+
+await InitializeRoles(app.Services);
+await AssignAdminRole(app.Services);
 
 app.Run();

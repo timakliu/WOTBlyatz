@@ -1,0 +1,41 @@
+﻿@model WOTBlyatz.Models.Mod
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Создать новый мод";
+  
+}
+
+<h2>Создать новый мод</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="Name">Название</label>
+        <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" required />
+    </div>
+    <div class="form-group">
+        <label for="Description">Описание</label>
+        <textarea class="form-control" id="Description" name="Description" required>@Model.Description</textarea>
+    </div>
+    <div class="form-group">
+        <label for="ImageUrl">URL изображения</label>
+        <input type="text" class="form-control" id="ImageUrl" name="ImageUrl" value="@Model.ImageUrl" />
+    </div>
+    <div class="form-group">
+        <label for="DownloadUrl">URL для скачивания</label>
+        <input type="text" class="form-control" id="DownloadUrl" name="DownloadUrl" value="@Model.DownloadUrl" />
+    </div>
+    <div class="form-group">
+        <label for="IsSubscriptionRequired">Требуется подписка</label>
+        <input type="checkbox" class="form-check-input" id="IsSubscriptionRequired" name="IsSubscriptionRequired" @(Model.IsSubscriptionRequired ? "checked" : "") />
+    </div>
+    <div class="form-group">
+        <label for="Categories">Категории</label>
+        <select class="form-control" id="Categories" name="Categories" multiple>
+            <!option value="Textures" @(Model.Categories.Contains(WOTBlyatz.Models.ModCategory.Textures) ? "selected" : "")>Текстуры</!option>
+            <!option value="Models" @(Model.Categories.Contains(WOTBlyatz.Models.ModCategory.Models) ? "selected" : "")>Модели</!option>
+            <!option value="Banned" @(Model.Categories.Contains(WOTBlyatz.Models.ModCategory.Banned) ? "selected" : "")>Заблокированные</!option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Создать мод</button>
+</form>

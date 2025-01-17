@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin Panel</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/admin-styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Сайдбар -->
+        <div class="sidebar bg-dark text-white d-flex flex-column p-3">
+            <div class="sidebar-header mb-4">
+                <h3>Админ Панель</h3>
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="/admin">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="/admin/mods">Моды</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="/admin/users">Пользователи</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Основная часть -->
+        <div class="main-content flex-grow-1 p-4">
+            <header>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+                    <a class="navbar-brand" href="#">Админ Панель</a>
+                    <div class="navbar-nav ml-auto">
+                        <a class="nav-link" href="#">Выйти</a>
+                    </div>
+                </nav>
+            </header>
+
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -406,3 +406,7 @@ footer .copy-text {
     }
 
 
+.login-container {
+    max-width: 500px;
+}
+

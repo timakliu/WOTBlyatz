@@ -23,10 +23,13 @@ public class AdminModsController : Controller
         return View(mods);
     }
 
+
     // Страница создания мода
+    [HttpGet]   
     public IActionResult Create()
     {
-        return View();
+        // Передаем пустую модель Mod в представление
+        return View(new Mod());
     }
 
     // Обработка создания нового мода
@@ -38,7 +41,7 @@ public class AdminModsController : Controller
         {
             _context.Add(mod);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Mods", "Admin");
         }
         return View(mod);
     }
@@ -102,6 +105,6 @@ public class AdminModsController : Controller
 
         _context.Mods.Remove(mod);
         await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Mods", "Admin");
     }
 }

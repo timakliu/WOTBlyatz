@@ -16,6 +16,42 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link @(ViewData["Category"]?.ToString() == "Remodeling" || ViewData["Category"] == null ? "active-menu-item" : "")"
+                       href="@Url.Action("Index", new { categoryFilter = "Remodeling", sortBy = ViewData["SortBy"] })">
+                        Ремоделинг
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(ViewData["Category"]?.ToString() == "Animation" ? "active-menu-item" : "")"
+                       href="@Url.Action("Index", new { categoryFilter = "Animation", sortBy = ViewData["SortBy"] })">
+                        Анимационные
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(ViewData["Category"]?.ToString() == "Trash" ? "active-menu-item" : "")"
+                       href="@Url.Action("Index", new { categoryFilter = "Trash", sortBy = ViewData["SortBy"] })">
+                        Треш моды
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(ViewData["Category"]?.ToString() == "Skins" ? "active-menu-item" : "")"
+                       href="@Url.Action("Index", new { categoryFilter = "Skins", sortBy = ViewData["SortBy"] })">
+                        Шкурки
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(ViewData["Category"]?.ToString() == "Other" ? "active-menu-item" : "")"
+                       href="@Url.Action("Index", new { categoryFilter = "Other", sortBy = ViewData["SortBy"] })">
+                        Другое
+                    </a>
+                </li>
+                @*     <li class="nav-item">
+                    <a class="nav-link @(ViewData["Category"]?.ToString() == "All" || ViewData["Category"] == null ? "active-menu-item" : "")"
+                       href="@Url.Action("Index", new { categoryFilter = "All", sortBy = ViewData["SortBy"] })">
+                        Все моды
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link @(ViewData["Category"]?.ToString() == "Textures" ? "active-menu-item" : "")"
                        href="@Url.Action("Index", new { categoryFilter = "Textures", sortBy = ViewData["SortBy"] })">
                         Текстуры
@@ -29,10 +65,10 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @(ViewData["Category"]?.ToString() == "Banned" ? "active-menu-item" : "")"
-                       href="@Url.Action("Index", new { categoryFilter = "Banned", sortBy = ViewData["SortBy"] })">
+                       href="@Url.Action("Index", new { categoryFilter = "  ", sortBy = ViewData["SortBy"] })">
                         Шкурки
                     </a>
-                </li>
+                </li> *@
             </ul>
         </div>
         <script>
@@ -54,6 +90,8 @@
                 <!option value="name" @((ViewData["SortBy"]?.ToString() == "name") ? "selected" : "")>По имени</!option>
                 <!option value="date" @((ViewData["SortBy"]?.ToString() == "date") ? "selected" : "")>По дате</!option>
                 <!option value="rating" @((ViewData["SortBy"]?.ToString() == "rating") ? "selected" : "")>По рейтингу</!option>
+                <!option value="downloads" @((ViewData["SortBy"]?.ToString() == "rating") ? "selected" : "")>По скачиваниям</!option>
+                <!option value="views" @((ViewData["SortBy"]?.ToString() == "rating") ? "selected" : "")>По просмотрам</!option>
             </select>
         </div>
     </div>

@@ -31,9 +31,11 @@
     <div class="form-group">
         <label for="Categories">Категории</label>
         <select class="form-control" id="Categories" name="Categories" multiple>
-            <!option value="Textures" @(Model.Categories.Contains(WOTBlyatz.Models.ModCategory.Textures) ? "selected" : "")>Текстуры</!option>
-            <!option value="Models" @(Model.Categories.Contains(WOTBlyatz.Models.ModCategory.Models) ? "selected" : "")>Модели</!option>
-            <!option value="Banned" @(Model.Categories.Contains(WOTBlyatz.Models.ModCategory.Banned) ? "selected" : "")>Заблокированные</!option>
+            <!option value="Animation" @(Model.Categories.Contains(WOTBlyatz.Models.ModCategory.Animation) ? "selected" : "")>Анимационные</!option>
+            <!option value="Remodeling" @(Model.Categories.Contains(WOTBlyatz.Models.ModCategory.Remodeling) ? "selected" : "")>Ремоделинг</!option>
+            <!option value="Skins" @(Model.Categories.Contains(WOTBlyatz.Models.ModCategory.Skins) ? "selected" : "")>Шкурки</!option>
+            <!option value="Trash" @(Model.Categories.Contains(WOTBlyatz.Models.ModCategory.Trash) ? "selected" : "")>Треш моды</!option>
+            <!option value="Other" @(Model.Categories.Contains(WOTBlyatz.Models.ModCategory.Other) ? "selected" : "")>Другое</!option>
         </select>
     </div>
     <button type="submit" class="btn btn-primary">Сохранить изменения</button>

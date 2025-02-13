@@ -115,14 +115,17 @@ app.UseAuthentication(); // ВАЖНО: должно быть перед Authorization
 app.UseAuthorization();
 
 
+
+app.MapControllerRoute(
+    name: "adminMods",
+    pattern: "admin/mods/{action}/{id?}",
+    defaults: new { controller = "AdminMods" });
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapControllerRoute(
-    name: "adminMods",
-    pattern: "admin/mods/{action=Index}/{id?}",
-    defaults: new { controller = "AdminMods" });
+
 
 
 
